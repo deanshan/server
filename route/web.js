@@ -6,7 +6,7 @@ module.exports = (function() {
   let router = express.Router();
 
   router.get('/', (req, res)=>{
-    fs.readFile("./static/mdfile/es6.md", function(err, data) {
+    fs.readFile("./static/typora/es6.md", function(err, data) {
       if(err) {
           throw err
       } else {
