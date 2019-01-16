@@ -1,4 +1,7 @@
 # 服务器
+## 需求
+   + 读取文件（文件名、内容）
+   + 登录验证
 ## 技术栈
  + node
     + fs
@@ -17,3 +20,5 @@
 |——utils       js工具
 |——route       路由文件
 |   |——route.js
+|   |——readFile.js
+|   |——login.js
