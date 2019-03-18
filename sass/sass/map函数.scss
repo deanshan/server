@@ -1,0 +1,32 @@
+$list:primary success info warning danger;
+$btn-color:(//定义map
+  primary: #337ab7,
+  success: #5cb85c,
+  info: #5bc0de,
+  warning: #f0ad4e,
+  danger: #d9534f,
+  i : red
+);
+//根据key 返回value
+// @each $key in $list{
+//   .btn-#{$key}{
+//     color: map-get($btn-color,$key)
+//   }
+// }
+//根据key判断，存在返回true
+// @function btn($key){
+//   @if not map-has-key($btn-color, $key){
+//     @debug "unfound"
+//   }
+//   @return map-get($btn-color, $key)
+// }
+// .btn-defualt{
+//   color: btn('info')
+// }
+// map-keys获取所有key  map-values获取所有值
+$m : map-remove($btn-color,'i');
+@each $key in map-keys($m){
+  .btn-#{$key}{
+    color: map-get($btn-color, $key)
+  }
+}

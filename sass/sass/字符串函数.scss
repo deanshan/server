@@ -1,0 +1,21 @@
+.t1{
+  content: quote(Hello Sass);
+  content: to-lower-case('Hello Sass')
+}
+.t2{
+  content: quote("'Hello Sass'");
+  width:  abs(-5.62);
+  height:  round(random() *1000);
+}
+
+body{
+  width: 300px;
+  @media screen and (max-width: 888px){
+    width: 888px;
+  }
+  @at-root .d{
+    color: desaturate(red, 10%);
+    color: fade-in(rgba(200, 40, 80, 0.65105),.2);
+    
+  }
+}

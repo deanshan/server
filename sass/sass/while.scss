@@ -1,0 +1,17 @@
+
+$list: primary success info warning danger;
+@each $item in $list{
+  .item-#{$item}{
+    background: url('./img/#{$item}.png')
+  }
+}
+
+
+
+$num : 1;
+@while $num <= 12 {
+  .col-md-#{$num}{
+    width: $num * 8.333333%
+  }
+  $num: $num + 1
+}

@@ -1,0 +1,19 @@
+
+$val: false;
+
+@mixin showOrHide($isShow:true){
+  @if $isShow{
+    // @warn "$isShow is #{$isShow}";
+    display: block
+  }
+  @else{
+    // @warn "$isShow is #{$isShow}";
+    display: none
+  }
+}
+.show{
+  @include showOrHide()
+}
+.hide{
+  @include showOrHide($val)
+}

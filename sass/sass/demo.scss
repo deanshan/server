@@ -1,0 +1,48 @@
+$color: #333 !default; //!default定义变量
+$b: 'border';
+$aw: 740;
+$bw: 220;
+$mw: 4;
+
+
+@mixin border-radius($r){
+  border-radius: $r;
+  -webkit-border-radius: $r
+}
+%btn{
+  @include border-radius(5px)
+  // border-radius: 6px;
+}
+.btn1{
+  @extend %btn
+}
+.btn2{
+  @extend %btn
+}
+.btn3{
+  @extend %btn
+}
+
+
+
+
+
+
+
+body{
+  // width: (2px/1);
+  width: $aw+$bw/$mw+rem;
+  height: 1px + 1px;
+
+  // $color: red;
+  color: #e06e6a + #00d5e4;
+  .btn{
+    color: $color;
+    .#{$b} {//调用变量 插值#{} 插入
+      #{$b} :red
+    }
+  }
+}
+
+
+
