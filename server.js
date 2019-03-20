@@ -14,19 +14,21 @@ const server = express();
 
 //设置允许跨域访问该服务
 server.all('*', function (req, res, next) {
+
   // 允许来自所有域名请求
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  res.header('Access-Control-Allow-Methods', '*');
-  res.header('Content-Type', 'application/json;charset=utf-8');
-  // 是否允许发送Cookie，ture为运行
-  // req.set('Access-Control-Allow-Credentials', true);
-
-  // 设置所允许的HTTP请求方法
-  // req.set('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, POST, DELETE');
 
   // 服务器支持的所有头信息字段，多个字段用逗号分隔
-  // req.set('Access-Control-Allow-Headers', 'x-requested-with, x-ui-request， lang');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+
+  res.header('Content-Type', 'application/json;charset=utf-8');
+
+  // 设置所允许的HTTP请求方法
+  req.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, POST, DELETE');
+
+  // 是否允许发送Cookie，ture为运行,如果设置为true，'Access-Control-Allow-Origin'就不能设置为'*'，要设置为具体的url
+  // req.set('Access-Control-Allow-Credentials', true);
+
   next();
 });
 

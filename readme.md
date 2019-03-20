@@ -17,6 +17,7 @@
 ## 目录结构
 |——server.js   服务器入口文件
 |——static      静态文件
+|   |——view       视图数据
 |——utils       js工具
 |——route       路由文件
 |   |——route.js

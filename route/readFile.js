@@ -3,7 +3,8 @@ const express=require('express')
 const fs = require('fs')
 const marked = require('marked')
 
-const dir_name = "./static/typora"  // 要读取的指定文件夹
+// const dir_name = "./static/typora"  // 要读取的指定文件夹
+const dir_name = "./static/data"  // 要读取的指定文件夹
 
 
 // 获取指定文件夹下的所有文件
@@ -48,8 +49,9 @@ const readFile = async (filenames) => {
 
                 if (error) return reject(error)
 
-                obj.filename = filename
-                obj.content = marked(data.toString())
+                // obj.filename = filename
+                // obj.content = marked(data.toString())
+                obj.content = JSON.parse(data)
                 filedata.push(obj)
 
                 resolve(filedata)
