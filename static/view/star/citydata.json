@@ -1,0 +1,152 @@
+{
+    "sh": {
+        "name": "上海",
+        "data": [
+            {
+                "distance": 800,
+                "speed": 100,
+                "destination": "安徽"
+            },
+            {
+                "distance": 200,
+                "speed": 150,
+                "destination": "江苏"
+            },
+            {
+                "distance": 1200,
+                "speed": 200,
+                "destination": "湖南"
+            },
+            {
+                "distance": 1500,
+                "speed": 300,
+                "destination": "北京"
+            },
+            {
+                "distance": 1000,
+                "speed": 350,
+                "destination": "山东"
+            }
+        ]
+    },
+    "bj": {
+        "name": "北京",
+        "data": [
+            {
+                "distance": 1080,
+                "speed": 188,
+                "destination": "安徽"
+            },
+            {
+                "distance": 888,
+                "speed": 150,
+                "destination": "江苏"
+            },
+            {
+                "distance": 1788,
+                "speed": 288,
+                "destination": "湖南"
+            },
+            {
+                "distance": 188,
+                "speed": 388,
+                "destination": "天津"
+            },
+            {
+                "distance": 588,
+                "speed": 350,
+                "destination": "山东"
+            }
+        ]
+    },
+    "gz": {
+        "name": "广州",
+        "data": [
+            {
+                "distance": 1922,
+                "speed": 122,
+                "destination": "安徽"
+            },
+            {
+                "distance": 1522,
+                "speed": 150,
+                "destination": "江苏"
+            },
+            {
+                "distance": 1022,
+                "speed": 222,
+                "destination": "湖南"
+            },
+            {
+                "distance": 2222,
+                "speed": 322,
+                "destination": "北京"
+            },
+            {
+                "distance": 1522,
+                "speed": 350,
+                "destination": "山东"
+            }
+        ]
+    },
+    "sz": {
+        "name": "深圳",
+        "data": [
+            {
+                "distance": 1999,
+                "speed": 199,
+                "destination": "安徽"
+            },
+            {
+                "distance": 1599,
+                "speed": 150,
+                "destination": "江苏"
+            },
+            {
+                "distance": 899,
+                "speed": 299,
+                "destination": "湖南"
+            },
+            {
+                "distance": 2199,
+                "speed": 399,
+                "destination": "北京"
+            },
+            {
+                "distance": 2599,
+                "speed": 350,
+                "destination": "山东"
+            }
+        ]
+    },
+    "hz": {
+        "name": "杭州",
+        "data": [
+            {
+                "distance": 600,
+                "speed": 400,
+                "destination": "安徽"
+            },
+            {
+                "distance": 166,
+                "speed": 150,
+                "destination": "江苏"
+            },
+            {
+                "distance": 566,
+                "speed": 266,
+                "destination": "湖南"
+            },
+            {
+                "distance": 866,
+                "speed": 366,
+                "destination": "北京"
+            },
+            {
+                "distance": 866,
+                "speed": 350,
+                "destination": "山东"
+            }
+        ]
+    }
+}

@@ -1,0 +1,30 @@
+{
+    "21-century": {
+        "centuryId": "21",
+        "name": "21世纪",
+        "year": [
+            {
+                "yearId": "2018",
+                "name": "2018年"
+            },
+            {
+                "yearId": "2019",
+                "name": "2019年"
+            }
+        ]
+    },
+    "20-century": {
+        "centuryId": "20",
+        "name": "20世纪",
+        "year": [
+            {
+                "yearId": "1998",
+                "name": "1998年"
+            },
+            {
+                "yearId": "1999",
+                "name": "1999年"
+            }
+        ]
+    }
+}
