@@ -1,5 +1,14 @@
 const express=require('express')
 const fs = require('fs')
+const mysql = require('mysql')
+
+// 数据库连接池
+let db = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '123456',
+    database: 'view'
+})
 
 module.exports = (function() {
     let router = express.Router();
@@ -7,6 +16,10 @@ module.exports = (function() {
     // 星空图
     // 返回城市列表
     router.get('/star/citylist', (req, res)=>{
+
+        db.query('SELECT * FROM citylist', (error, data) => {
+            console.log(data)
+        })
 
         fs.readFile("./static/view/star/citylist.json", function(err, data) {
             if(err) {
@@ -47,7 +60,7 @@ module.exports = (function() {
     // 矩阵图
     // 返回世纪列表
     router.get('/matrix/century', (req, res)=>{
-        console.log(req.query)
+
         fs.readFile("./static/view/matrix/centurylist.json", function(err, data) {
             if(err) {
                 throw err
@@ -100,7 +113,7 @@ module.exports = (function() {
                 resolve(date)
             })
         })
-        console.log(date)
+
         for(let item of Object.values(date)) {
 
             for(let key in item) {
