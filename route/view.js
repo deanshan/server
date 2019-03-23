@@ -18,16 +18,17 @@ module.exports = (function() {
     router.get('/star/citylist', (req, res)=>{
 
         db.query('SELECT * FROM citylist', (error, data) => {
-            console.log(data)
+
+            res.send(data).end()
         })
 
-        fs.readFile("./static/view/star/citylist.json", function(err, data) {
-            if(err) {
-                throw err
-            } else {
-                res.send(data).end();
-            }
-        })
+        // fs.readFile("./static/view/star/citylist.json", function(err, data) {
+        //     if(err) {
+        //         throw err
+        //     } else {
+        //         res.send(data).end();
+        //     }
+        // })
     });
     // 根据cityId来返回相应的数据
     router.get('/star/citydata', async (req, res)=>{
@@ -35,26 +36,33 @@ module.exports = (function() {
         let cityId = req.query.cityId
         let citydata = {}
 
-        await new Promise((resolve, reject) => {
-            fs.readFile("./static/view/star/citydata.json", (error, data) => {
+        db.query(`SELECT * FROM citydata WHERE city_id='${cityId}'`, (error, data) => {
 
-                if (error) return reject(error)
+            console.log(data)
 
-                // citydata.push(JSON.parse(data))
-                citydata = JSON.parse(data) //必须要对读取的文件内容data做处理
-
-                resolve(citydata)
-            })
+            res.send(data).end()
         })
 
-        for(let key in citydata) {
+        // await new Promise((resolve, reject) => {
+        //     fs.readFile("./static/view/star/citydata.json", (error, data) => {
 
-            if(cityId === key) {
+        //         if (error) return reject(error)
 
-                res.send(citydata[key]).end();
+        //         // citydata.push(JSON.parse(data))
+        //         citydata = JSON.parse(data) //必须要对读取的文件内容data做处理
 
-            }
-        }
+        //         resolve(citydata)
+        //     })
+        // })
+
+        // for(let key in citydata) {
+
+        //     if(cityId === key) {
+
+        //         res.send(citydata[key]).end();
+
+        //     }
+        // }
     });
 
     // 矩阵图
