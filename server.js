@@ -34,6 +34,7 @@ server.all('*', function (req, res, next) {
 
 // 获取请求数据
 server.use(bodyParser.urlencoded({extended: false}));
+server.use(bodyParser.json());  //如果不转为json,body只是个空对象
 server.use(upload.any());   //  接收任何文件
 
 // 解析cookie、处理session
