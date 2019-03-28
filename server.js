@@ -19,7 +19,7 @@ server.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
 
   // 服务器支持的所有头信息字段，多个字段用逗号分隔
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept,token');
 
   res.header('Content-Type', 'application/json;charset=utf-8');
 
@@ -27,14 +27,14 @@ server.all('*', function (req, res, next) {
   req.header('Access-Control-Allow-Methods', 'OPTIONS, GET, PUT, POST, DELETE');
 
   // 是否允许发送Cookie，ture为运行,如果设置为true，'Access-Control-Allow-Origin'就不能设置为'*'，要设置为具体的url
-  // req.set('Access-Control-Allow-Credentials', true);
+  // req.header('Access-Control-Allow-Credentials', true);
 
   next();
 });
 
 // 获取请求数据
 server.use(bodyParser.urlencoded({extended: false}));
-server.use(bodyParser.json());  //如果不转为json,body只是个空对象
+server.use(bodyParser.json());  //FIXME:如果不转为json,body只是个空对象
 server.use(upload.any());   //  接收任何文件
 
 // 解析cookie、处理session
