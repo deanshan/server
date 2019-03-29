@@ -18,7 +18,6 @@ let token;
 module.exports = (function() {
     let router = express.Router();
 
-    // 返回始发城市列表
     router.post('/user', (req, res)=>{
         // 前端提交加密后的字段并和加密过的数据库的数据对比 注册的时候可以加密存储到数据库
         let username = req.body.username;   //  admin
@@ -27,7 +26,7 @@ module.exports = (function() {
         db.query(`SELECT * FROM user_info WHERE username = '${username}'`, (error, data) => {
 
             if(error) {
-                res.status(500).send('用户名或密码输入不正确').end();
+                res.status(500).send('database error').end();
             } else {
                 if(data.length === 0) {
                     res.status(400).send('用户名不存在').end();
