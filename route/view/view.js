@@ -3,11 +3,17 @@ const fs = require('fs')
 const mysql = require('mysql')
 
 // 数据库连接池
-let db = mysql.createPool({
+let dbView = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '123456',
     database: 'view'
+})
+let dbAdmin = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '123456',
+    database: 'admin'
 })
 
 // 读取mysql数据
@@ -18,7 +24,17 @@ module.exports = (function() {
     // 返回始发城市列表
     router.get('/star/citylist', (req, res)=>{
 
-        db.query('SELECT * FROM citydata WHERE city_id="C10000"', (error, data) => {
+        let time = new Date().getTime()
+        let token = req.headers.token
+
+        dbAdmin.query(`SELECT * FROM token_table WHERE token='${token}'`, (error, data) => {
+
+            let diff = (Number(time) - Number(data[0].time)) / 60 / 1000
+            if(diff < 30) console.log(diff)
+        })
+        valid.valid(req)
+
+        dbView.query('SELECT * FROM citydata WHERE city_id="C10000"', (error, data) => {
 
             res.send(data).end()
         })
@@ -28,7 +44,7 @@ module.exports = (function() {
 
         let cityId = req.query.cityId
 
-        db.query(`SELECT * FROM citydata WHERE city_id='${cityId}'`, (error, data) => {
+        dbView.query(`SELECT * FROM citydata WHERE city_id='${cityId}'`, (error, data) => {
 
             res.send(data).end()
         })
@@ -36,7 +52,7 @@ module.exports = (function() {
 
     router.get('/matrix/century', (req, res)=>{
 
-        db.query(`SELECT * FROM yearlist WHERE centuryId='SJ00000'`, (error, data) => {
+        dbView.query(`SELECT * FROM yearlist WHERE centuryId='SJ00000'`, (error, data) => {
 
             res.send(data).end()
         })
@@ -46,7 +62,7 @@ module.exports = (function() {
 
         let centuryId = req.query.centuryId
 
-        db.query(`SELECT * FROM yearlist WHERE centuryId='${centuryId}'`, (error, data) => {
+        dbView.query(`SELECT * FROM yearlist WHERE centuryId='${centuryId}'`, (error, data) => {
 
             res.send(data).end()
         })
@@ -145,7 +161,7 @@ module.exports = (function() {
 //         let centuryId = req.query.centuryId
 //         let year = {}
 
-//         db.query(`SELECT * FROM citydata WHERE city_id='${cityId}'`, (error, data) => {
+//         dbView.query(`SELECT * FROM citydata WHERE city_id='${cityId}'`, (error, data) => {
 
 //             res.send(data).end()
 //         })

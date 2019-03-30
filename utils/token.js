@@ -1,35 +1,53 @@
 const mysql = require('mysql')
-const md5 = require('md5.js')
+// const md5 = require('../../utils/md5')
 
 // 数据库连接池
-let db = mysql.createPool({
+let dbAdmin = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '123456',
     database: 'admin'
 })
 
-// 生成随机token值，若数据库不存在token，则添加，若存在，则替换
-let token;
+module.exports = {
+    // randomToken: (res) => {
 
-let select = `SELECT * FROM token`
-let insert = `INSERT INTO token(token) VALUES ('${token}')`
-db.query(select, (error, data) => {
-    if(error) {
-        res.status(500).send('database error').end();
-    } else {
-        if(data.length >= 0) {
+    //     dbAdmin.query(`SELECT * FROM token_table`, (error, data) => {
+    //         if(error) {
+    //             res.status(500).send('database error').end();
+    //         } else {
 
-        } else {
-            token = md5.MD5(Math.random() + md5.MD5_SUFFIX);
+    //             let token = md5.MD5(Math.random() + md5.MD5_SUFFIX);
+    //             let time = new Date().getTime()
 
-            db.query(insert, (error, data) => {
-                if(error){
-                    res.status(500).send('database error').end();
-                }
-            })
-        }
+    //             if(data.length === 0) { // 数据库不存在token，添加
+    //                 dbAdmin.query(`INSERT INTO token_table(token,time) VALUES('${token}','${time}')`, (err, data) => {
+    //                     if(err){
+    //                         res.status(500).send('database error').end();
+    //                     } else {
+    //                         res.status(200).send(token).end()
+    //                     }
+    //                 })
+    //             } else {    // 数据库已存在token，替换
+    //                 dbAdmin.query(`UPDATE token_table SET token='${token}'`, (err, data) => {
+    //                     if(err){
+    //                         res.status(500).send('database error').end();
+    //                     } else {
+    //                         res.status(200).send(token).end()
+    //                     }
+    //                 })
+    //             }
+    //         }
+    //     })
+    // },
+    valid: (req) => {
+        let time = new Date().getTime()
+        let token = req.headers.token
+
+        dbAdmin.query(`SELECT * FROM token_table WHERE token='${token}'`, (error, data) => {
+
+            let diff = (Number(time) - Number(data[0].time)) / 60 / 1000
+            console.log(diff)
+        })
     }
-
-})
-// 每次请求验证token是否携带并正确
+}

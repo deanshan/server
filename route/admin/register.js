@@ -1,7 +1,7 @@
 const express = require('express')
 const mysql = require('mysql')
 
-const md5 = require('../utils/md5')
+const md5 = require('../../utils/md5')
 
 
 
