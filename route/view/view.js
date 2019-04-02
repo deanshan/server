@@ -1,73 +1,46 @@
 const express=require('express')
 const fs = require('fs')
-const mysql = require('mysql')
 
-// 数据库连接池
-let dbView = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '123456',
-    database: 'view'
-})
-let dbAdmin = mysql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: '123456',
-    database: 'admin'
-})
+const exception = require('../../utils/validToken')
+// const mysql = require('mysql')
 
-// 读取mysql数据
-
+// // 数据库连接池
+// let dbView = mysql.createPool({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '123456',
+//     database: 'view'
+// })
+// let dbAdmin = mysql.createPool({
+//     host: 'localhost',
+//     user: 'root',
+//     password: '123456',
+//     database: 'admin'
+// })
 module.exports = (function() {
     let router = express.Router();
 
-    // 返回始发城市列表
     router.get('/star/citylist', (req, res)=>{
 
-        let time = new Date().getTime()
-        let token = req.headers.token
-
-        dbAdmin.query(`SELECT * FROM token_table WHERE token='${token}'`, (error, data) => {
-
-            let diff = (Number(time) - Number(data[0].time)) / 60 / 1000
-            if(diff < 30) console.log(diff)
-        })
-        valid.valid(req)
-
-        dbView.query('SELECT * FROM citydata WHERE city_id="C10000"', (error, data) => {
-
-            res.send(data).end()
-        })
+        exception('SELECT * FROM citydata WHERE city_id="C10000"', req, res)
     });
-    // 根据cityId来返回相应的数据
+
     router.get('/star/citydata', async (req, res)=>{
 
-        let cityId = req.query.cityId
-
-        dbView.query(`SELECT * FROM citydata WHERE city_id='${cityId}'`, (error, data) => {
-
-            res.send(data).end()
-        })
+        exception(`SELECT * FROM citydata WHERE city_id='${req.query.cityId}'`, req, res)
     });
 
     router.get('/matrix/century', (req, res)=>{
 
-        dbView.query(`SELECT * FROM yearlist WHERE centuryId='SJ00000'`, (error, data) => {
-
-            res.send(data).end()
-        })
+        exception(`SELECT * FROM yearlist WHERE centuryId='SJ00000'`, req, res)
     });
-    // 返回对应世纪中的年份
+
     router.get('/matrix/year', (req, res)=>{
 
-        let centuryId = req.query.centuryId
-
-        dbView.query(`SELECT * FROM yearlist WHERE centuryId='${centuryId}'`, (error, data) => {
-
-            res.send(data).end()
-        })
+        exception(`SELECT * FROM yearlist WHERE centuryId='${req.query.centuryId}'`, req, res)
     });
-    // 返回指定年份下的日期状态(数据太大，通过读取文件来获取)
+
+    // TODO:返回指定年份下的日期状态(数据太大，通过读取文件来获取)
     router.get('/matrix/date', async (req, res)=>{
 
         let yearId = req.query.yearId
